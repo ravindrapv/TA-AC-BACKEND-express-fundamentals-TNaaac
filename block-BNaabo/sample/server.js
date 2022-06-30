@@ -5,11 +5,11 @@ var app = express();
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static(__dirname + "/public"));
 
 app.post("/json", (req, res) => {
   console.log(req.body); //captuering data
 });
-app.use(express.static(__dirname + "/publick"));
 
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/index.html");
