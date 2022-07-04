@@ -13,6 +13,7 @@
   "dependencies": {
     "cookie-parser": "^1.4.6",
     "express": "^4.18.1",
+    "exprss": "^0.0.1-security",
     "morgan": "^1.10.0"
   }
 }
