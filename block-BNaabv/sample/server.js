@@ -1,32 +1,43 @@
-let express = require('express')
-let logger = require('morgan')
+var express = require('express')
+var logger = require('morgan')
+var cookieParser = require('cookie-parser');
 
-let router = express.Router()
+var app = express()
 
-let app = express()
-
-// app.use(cookieParser());
+app.use(cookieParser());
 app.use(logger("dev"))
+app.use(express.urlencoded({extended:false}));
+app.use(express.json())
 
-console.log('start');
+app.get('/',(req,res) => {
+    res.send('<h2>welcome to express</h2>');
+});
 
-
-router.get('/about',(req,res) => {
-    res.send('Hello')
+app.get('/about',(req,res,next) => {
+   res.send('My name is qwerty');
+   next();
+})
+app.get('/new',(req,res) => {
+    res.sendFile(__dirname + '/index.html');
 })
 
-app.get('/',(req,res,next) => {
-    try {
-        res.send('Hello')
-    } catch (error) {
-        console.log(error);
-        next()
-    }
+app.post('/new',(req,res) => {
+    res.json(req.body);
 })
 
-app.listen((4000,(err) => {
-    if(err) console.log(err);
-    console.log('sever is listen on port 4k');
-}))
+app.post('/json',(req,res) => {
+    res.json(req.body);
+})
+
+app.use((req,res) => {
+    res.send("page not found error 404")
+})
+app.use((err,req,res,next) => {
+    res.send(err);
+})
+
+app.listen((5000),() => {
+    console.log('sever is listen on port 5k');
+})
  
 
