@@ -7,9 +7,9 @@ app.use(express.urlencoded({extended:false}));
 app.use(coockiParseer());
 app.use(logger('dev'));
 
-
+app.use(express.static(__dirname + '/public'));
+console.log(__dirname)
 app.get('/',(req,res) => {
-
   res.send('welcome');
 });
 
@@ -18,6 +18,6 @@ app.get('/users',(req,res) => {
     res.sendFile(__dirname + '/index.html');
 })
 
-app.listen(4000,() => {
+app.listen(5000,() => {
     console.log("server is listing on port");
 });
